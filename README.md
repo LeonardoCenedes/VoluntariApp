@@ -1,73 +1,35 @@
-# React + TypeScript + Vite
+# VoluntariApp
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+O VoluntariApp é uma plataforma desenvolvida para conectar voluntários a eventos e organizações que precisam de ajuda.
 
-Currently, two official plugins are available:
+## Stack do Projeto
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+- **React** com **Vite**
+- **TypeScript**
+- **Tailwind CSS**
+- **shadcn/ui** para componentes de interface
+- **pnpm** como gerenciador de pacotes
 
-## React Compiler
+O projeto organiza seu código baseado em Clean Architecture (dividido principalmente em `domain`, `data`, `presentation` e `core`).
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## Como rodar localmente
 
-## Expanding the ESLint configuration
+1. Certifique-se de ter o [Node.js](https://nodejs.org/) e o [pnpm](https://pnpm.io/) instalados.
+2. Instale as dependências:
+   ```bash
+   pnpm install
+   ```
+3. Rode o servidor de dev:
+   ```bash
+   pnpm dev
+   ```
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+Acesse a aplicação no navegador pelo endereço que aparecer no terminal (geralmente `http://localhost:5173`).
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+## Estrutura Básica
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+- `src/domain/`: Modelos de dados e as interfaces (contratos) dos repositórios.
+- `src/data/`: Implementação dos repositórios, chamadas de API e mocks.
+- `src/presentation/`: Páginas, componentes visuais e "controllers" (hooks que ligam a UI aos dados).
+- `src/core/`: Código compartilhado, rotas e utilitários.
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
-
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
-
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
